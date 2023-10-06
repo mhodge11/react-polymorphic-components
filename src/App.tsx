@@ -1,26 +1,36 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { useRef } from "react";
+import "./App.css";
+import { Text } from "./components";
 
-function App() {
+const Emphasis = ({ children }: { children: string | number }) => (
+  <em style={{ background: "yellow", color: "black", fontSize: "40px" }}>
+    {children}
+  </em>
+);
+
+export const App = () => {
+  const ref = useRef<HTMLAnchorElement | null>(null);
+  const ref2 = useRef<HTMLHeadingElement | null>(null);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Text ref={ref2} as="h1">
+        Hello CodeSandbox
+      </Text>
+
+      <Text as="h2" color="violet" style={{ backgroundColor: "black" }}>
+        Start editing to see some magic happen!
+      </Text>
+
+      <Text ref={ref} as="a" href="https://www.google.com">
+        Hello world
+      </Text>
+
+      <Text>This is a text node with no as</Text>
+
+      <br />
+
+      <Text as={Emphasis}>This is a text node with emphasis</Text>
     </div>
   );
-}
-
-export default App;
+};
